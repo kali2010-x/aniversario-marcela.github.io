@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestro Aniversario de 3 Meses</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6f61, #ff4c3b);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden; /* Evita el desplazamiento horizontal */
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 20px;
+            border-bottom: 5px solid #ff4c3b;
+        }
+        h1 {
+            font-size: 3.5rem;
+            margin: 0;
+        }
+        .special-text {
+            font-size: 2.5rem; /* Texto más grande */
+            margin-top: 20px;
+        }
+        /* Estilos mejorados del carrusel */
+        .carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 350px; /* Altura fija para el carrusel */
+        }
+        .carousel-item {
+            min-width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-item img {
+            width: 60%; /* Aumenta el ancho de la imagen */
+            height: auto;
+            max-height: 500px; /* Aumenta la altura máxima de la imagen */
+            object-fit: cover;
+            border-radius: 15px 0 0 15px;
+        }
+        .carousel-text {
+            width: 40%; /* Ajusta el ancho del texto */
+            height: 100%;
+            padding: 20px;
+            text-align: left;
+             font-size: 2 rem; /* Aumenta el tamaño de la fuente del texto */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.3);
+             border-radius: 0 15px 15px 0;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            z-index: 10;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .carousel-button.prev {
+            left: 10px;
+        }
+        .carousel-button.next {
+            right: 10px;
+        }
+        /* Estilo para los controles de audio */
+        .audio-controls {
+            margin: 20px auto;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            width: 300px;
+        }
+        .audio-button {
+            background-color: #ff4c3b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        .audio-button:hover {
+            background-color: #ff6f61;
+        }
+        .video-container {
+            margin: 40px auto;
+            max-width: 800px;
+        }
+        .video-container video {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .message {
+            margin-top: 30px;
+            font-size: 2.5rem; /* Texto más grande */
+            line-height: 1.6;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px; /* Más padding para mayor espacio */
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 1.5rem;
+            z-index: 2; /* Asegura que el footer esté por encima de las imágenes */
+        }
+        .poema {
+            text-align: center;
+            font-style: italic;
+            margin: 20px 0;
+            color: #ffcccb;
+        }
+        .poemas-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+        .poema-columna {
+            width: 30%;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6f61;
+            transform: rotate(-45deg);
+            animation: float 5s infinite ease-in-out;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff6f61;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: 10px;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(-45deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(-45deg);
+            }
+        }
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .poema-columna {
+                width: 100%;
+            }
+            .carousel-item {
+                flex-direction: column;
+            }
+            .carousel-item img, .carousel-text {
+                width: 100%;
+            }
+            .carousel-inner {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Corazones animados de fondo -->
+    <div class="heart" style="top: 10%; left: 5%; animation-delay: 0s;"></div>
+    <div class="heart" style="top: 20%; left: 80%; animation-delay: 2s;"></div>
+    <div class="heart" style="top: 50%; left: 30%; animation-delay: 4s;"></div>
+    <div class="heart" style="top: 70%; left: 60%; animation-delay: 1s;"></div>
+    <div class="heart" style="top: 90%; left: 10%; animation-delay: 3s;"></div>
+    <div class="heart" style="top: 10%; left: 10%; animation-delay: 1s;"></div>
+    <div class="heart" style="top: 20%; left: 80%; animation-delay: 3s;"></div>
+    <div class="heart" style="top: 50%; left: 30%; animation-delay: 4s;"></div>
+    <div class="heart" style="top: 70%; left: 60%; animation-delay: 1s;"></div>
+    <div class="heart" style="top: 90%; left: 10%; animation-delay: 2s;"></div>
+
+    <header>
+        <h1>¡Feliz Aniversario de 3 Meses!</h1>
+        <p class="special-text">Para mi novia más especial ❤️</p>
+    </header>
+
+    <!-- Controles de música mejorados -->
+    <div class="audio-controls">
+        <button class="audio-button" onclick="document.getElementById('miMusica').play()">▶️ Reproducir</button>
+        <button class="audio-button" onclick="document.getElementById('miMusica').pause()">⏸️ Pausar</button>
+        <audio id="miMusica" preload="auto">
+            <source src="Musica1 (mp3cut.net) (1).MP3" type="audio/mpeg">
+            <source src="Musica1 (mp3cut.net) (1).ogg" type="audio/ogg">
+            Tu navegador no soporta la reproducción de audio.
+        </audio>
+        <p style="font-size: 0.8rem; margin-top: 10px;">Tu musica favorita<3 TE AMOO!!</p>
+    </div>
+
+   <!-- Carrusel de imágenes con textos ampliados -->
+<div class="carousel" style="max-width: 1200px;">
+    <div class="carousel-inner" style="height: 500px; font-size: 1.5rem;">
+        <div class="carousel-item">
+            <img src="foto1.jpg" alt="Nuestra foto 1">
+            <div class="carousel-text">Ese dia estaba tan emocionado! porque fue la primera vez que fuimos a la piscina y te enseñe a nadar :,3.</div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto2.jpg" alt="Nuestra foto 2">
+            <div class="carousel-text">Fue unos de los mejores dias porque cumplimos 2 meses y en san valentin.AME los regalos y de verdad aprecio todos y esa carta :( me dolio</div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto3.jpg" alt=">"Nuestra foto 3>
+            <div class="carousel-text">Una tarde magica a tu lado mi amor , nuestra primera cita en un restaurante y me encanto comer <3</div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto4.jpg" alt="Nuestra foto 4">
+            <div class="carousel-text">Te acompañe para que vayas al discurso del IEEE y te veias hermosa (me senti tan orgulloso de ti) cada cosa que hagas estare feliz.Porque eso te hace feliz. </div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto5.jpg" alt="Nuestra foto 5">
+            <div class="carousel-text">AMO TUS LOCURAS ,TUS RISAS , TUS SARCASMOS , AMO QUE SIEMPRE ME SIGUES EN LAS TONTERIAS QUE HAGO <3 </div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto6.jpg" alt="Nuestra foto 6">
+            <div class="carousel-text">Hago muchas cosas nuevas contigo , me encanta que me obligues o que me digas en hacer algo LO AMOOO...  </div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto7.jpg" alt="Nuestra foto 7">
+            <div class="carousel-text">Espero estar contigo siempre...Lo sexy que te ves en mis ojos no tienes ni idea corazon</div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto8.jpg" alt="Nuestra foto 8">
+            <div class="carousel-text">No me gusta tomarme muchas fotos pero contigo me encanta !! tu sonrisa es mas bella en camara y en persona es incluso mejor.</div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto9.jpg" alt="Nuestra foto 9">
+            <div class="carousel-text">Fuimos a jugar bolos y vivimos tantas cosas en esa cita  sjsj que me alegro que estuvieras ahi para que me animes </div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto10.jpg" alt="Nuestra foto 10">
+            <div class="carousel-text">Divina y hermosa.Me alegro que el camino nos haya juntado  otra vez :3</div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto11.jpg" alt="Nuestra foto 11">
+            <div class="carousel-text">AMOOO Y EXTRAÑOOO IR AL GYMM :,( QUIERO CRECER JUNTO A TI</div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto17.jpg" alt="Nuestra foto 17">
+            <div class="carousel-text">EN ESE MOMENTO ESTABA RE NERVIOSOS QUE NO CREIA que fuera todo esto verdad. Estaba tan emocionado porque se cumplio lo que paso cuando te vi por primera vez </div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto16.jpg" alt="Nuestra foto 16">
+            <div class="carousel-text">Era el momento donde  me encontraba contigo por primera vez como pareja. ME BESASTES!! Y YA NO ME PODIA AGUANTAR </div>
+        </div>
+        <div class="carousel-item">
+            <img src="foto15.jpg" alt="Nuestra foto 15">
+            <div class="carousel-text">Nos quedamos viendo a las tortugas  de espol y la pase tan tranquilo contigo ese dia . Estabamos tan nerviosos por los examenes que nos olvidamos de esos examenes por un tiempo :3 </div>
+        </div>
+    </div>
+    <button class="carousel-button prev">&#10094;</button>
+    <button class="carousel-button next">&#10095;</button>
+</div>
+
+        <!-- Contenedor de videos ajustados en una fila -->
+<div class="video-container" style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+    <video controls style="width: 90%; border-radius: 25px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);">
+        <source src="video1.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+    </video>
+    <video controls style="width: 60%; border-radius: 25px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);">
+        <source src="video2.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+    </video>
+    <video controls style="width: 90%; border-radius: 25px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);">
+        <source src="video3.mp4" type="video/mp4">
+        Tu navegador no soporta la reproducción de video.
+    </video>
+</div>
+
+    <div class="container">
+        <div class="message">
+            <p>Mi amada Marcela <3,</p>
+            <p>Estos maravillosos 3 meses a tu lado han transformado mi mundo por completo. Cada minuto, cada segundo que paso contigo es un regalo que atesoro con todo mi corazón. Desde nuestras largas conversaciones hasta nuestros momentos de silencio compartido, todo se vuelve mágico cuando estoy contigo. Eres el sueño que nunca supe que tenía hasta que apareciste en mi vida.</p>
+            <p>No tengo palabras suficientes para expresar lo mucho que significas para mí. Tu sonrisa ilumina mis días más oscuros, tu voz es la melodía que calma mi alma, y tu amor es el refugio donde siempre quiero estar. Tal vez no pueda ofrecerte ahora grandes regalos materiales, pero te entrego lo más valioso que tengo: mi corazón, mi tiempo y mi amor incondicional que crece cada día más y más.</p>
+            <p>Cuando miro tus ojos, veo un universo infinito de posibilidades, de sueños por cumplir y momentos por vivir. Me encanta descubrir cada día algo nuevo de ti, esas pequeñas cosas que te hacen única y perfecta a mis ojos. Amo tus virtudes que me inspiran y también esos "defectos" que para mí son solo partes preciosas de quien eres.</p>
+            <p>Gracias por permitirme caminar a tu lado, por compartir tus alegrías y tristezas, por confiar en mí y por hacerme sentir el hombre más afortunado del mundo. Estos tres meses son solo el comienzo de nuestra historia, una historia que quiero seguir escribiendo contigo por mucho, mucho tiempo más.</p>
+
+            <div class="poemas-container">
+                <div class="poema-columna">
+                    <p class="poema">SUSPIROS DE AMOR</p>
+                    <p class="poema">
+                        Como suave brisa de primavera,<br>
+                        llegaste a mi vida, sin avisar.<br>
+                        Con pasos de seda y mirada sincera,<br>
+                        mi corazón decidiste conquistar.<br><br>
+                        
+                        Tu risa contagiosa, melodía celestial,<br>
+                        tus manos pequeñas, caricia divina.<br>
+                        Eres mi princesa, mi tesoro especial,<br>
+                        la estrella brillante que mi cielo ilumina.<br><br>
+                        
+                        En cada latido, tu nombre repito,<br>
+                        en cada suspiro, tu amor yo respiro.<br>
+                        Eres mi presente, mi dulce destino,<br>
+                        la razón perfecta en mi camino.
+                    </p>
+                </div>
+                
+                <div class="poema-columna">
+                    <p class="poema">POEMA PARA MI NIÑA <3</p>
+                    <p class="poema">
+                        Tus ojos negros, dos luceros,<br>
+                        iluminan mis días enteros.<br>
+                        Tu cabello, noche sin fin,<br>
+                        es el refugio donde quiero vivir.<br><br>
+                        
+                        Dices que tienes defectos,<br>
+                        pero yo veo en ellos reflejos<br>
+                        de una mujer única, sin igual,<br>
+                        que con su esencia me hace volar.<br><br>
+                        
+                        Te amo por cómo eres,<br>
+                        con tus risas y tus placeres:<br>
+                        el rojo que te hace brillar,<br>
+                        los gatitos que sabes mimar.<br><br>
+                        
+                        Juegas, dibujas, pintas con pasión,<br>
+                        y en cada gesto pones el corazón.<br>
+                        Tu sonrisa es mi alegría,<br>
+                        mi razón, mi poesía.<br><br>
+                        
+                        No importa lo que digas o creas,<br>
+                        para mí eres la mujer más bella.<br>
+                        Eres mi todo, mi razón de ser,<br>
+                        y en este amor quiero crecer.
+                    </p>
+                </div>
+                
+                <div class="poema-columna">
+                    <p class="poema">NUESTRA DANZA ETERNA</p>
+                    <p class="poema">
+                        Tres meses de dulce aventura,<br>
+                        tres meses de amor verdadero.<br>
+                        Contigo aprendí la ternura,<br>
+                        y el significado de "te quiero".<br><br>
+                        
+                        Tus manos, delicadas flores,<br>
+                        tu alma, pura y transparente.<br>
+                        Eres un jardín de colores<br>
+                        que florece eternamente.<br><br>
+                        
+                        Cada día a tu lado es un regalo,<br>
+                        cada noche, un sueño cumplido.<br>
+                        En tu amor me pierdo y me hallo,<br>
+                        en tu ser, mi ser ha renacido.<br><br>
+                        
+                        Bailemos juntos esta danza,<br>
+                        tejiendo sueños, construyendo historias.<br>
+                        Con la fuerza de nuestra confianza,<br>
+                        y el tesoro de nuestras memorias.
+                    </p>
+                </div>
+            </div>
+
+            <p>Con todo mi amor, hoy y siempre,</p>
+            <p>Kevin ❤️</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Creado con amor para ti, mi niña hermosa 🐱</p>
+    </footer>
+
+    <script>
+        // Script mejorado para el carrusel de imágenes
+        document.addEventListener('DOMContentLoaded', function() {
+            const carousel = document.querySelector('.carousel-inner');
+            const items = document.querySelectorAll('.carousel-item');
+            const prevBtn = document.querySelector('.carousel-button.prev');
+            const nextBtn = document.querySelector('.carousel-button.next');
+            
+            let currentIndex = 0;
+            const itemWidth = 100; // Porcentaje
+            
+            // Configuración inicial
+            carousel.style.transform = `translateX(0%)`;
+            
+            // Función para mostrar una imagen específica
+            function showItem(index) {
+                if (index < 0) {
+                    index = items.length - 1;
+                } else if (index >= items.length) {
+                    index = 0;
+                }
+                
+                currentIndex = index;
+                carousel.style.transform = `translateX(-${currentIndex * itemWidth}%)`;
+            }
+            
+            // Función para avanzar al siguiente elemento
+            function nextItem() {
+                showItem(currentIndex + 1);
+            }
+            
+            // Función para retroceder al elemento anterior
+            function prevItem() {
+                showItem(currentIndex - 1);
+            }
+            
+            // Eventos de click para los botones
+            nextBtn.addEventListener('click', nextItem);
+            prevBtn.addEventListener('click', prevItem);
+            
+            // Manejar eventos de teclado para accesibilidad
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowRight') {
+                    nextItem();
+                } else if (e.key === 'ArrowLeft') {
+                    prevItem();
+                }
+            });
+            
+            // Comprobar si el archivo de audio existe
+            const audio = document.getElementById('miMusica');
+            audio.addEventListener('error', function() {
+                const audioControls = document.querySelector('.audio-controls');
+                audioControls.innerHTML = '<p style="color: #ffcccb;">¡Atención! No se pudo cargar el archivo de música. Asegúrate de que "musica.mp3" esté en la misma carpeta que este archivo HTML.</p>';
+            });
+        });
+    </script>
+</body>
+</html>
